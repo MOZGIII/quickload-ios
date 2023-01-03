@@ -8,14 +8,37 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var statusMessage = "Ready!"
+    @State var content = ""
+    @State var error = ""
+
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Text(self.statusMessage)
+            Text(self.error)
+            Button(action: {
+                Task {
+                    await self.load()
+                }
+            }) {
+                Text("Load")
+            }
+            Text(self.content)
         }
         .padding()
+    }
+
+    func load() async {
+        self.statusMessage = "Loading..."
+        self.error = ""
+
+        let manager = Manager()
+        let url = "https://raw.githubusercontent.com/chinedufn/swift-bridge/master/examples/async-functions/src/lib.rs"
+        let path = URL.documentsDirectory.appendingPathComponent("myio.txt").path(percentEncoded: false)
+        let error = await manager.load(url, path)
+
+        self.statusMessage = "Ready!"
+        self.error = error.toString()
     }
 }
 

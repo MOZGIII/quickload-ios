@@ -53,6 +53,7 @@
 		383B96DF295287A80082E9F2 /* bridges.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bridges.swift; sourceTree = "<group>"; };
 		383B96E0295287A80082E9F2 /* SwiftBridgeCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftBridgeCore.h; sourceTree = "<group>"; };
 		383B96E1295287A80082E9F2 /* SwiftBridgeCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftBridgeCore.swift; sourceTree = "<group>"; };
+		3888D1F32964E00600A97561 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +107,7 @@
 		38186DA52952152D00C79A5C /* QuickLoad */ = {
 			isa = PBXGroup;
 			children = (
+				3888D1F32964E00600A97561 /* Info.plist */,
 				38186DA62952152D00C79A5C /* QuickLoadApp.swift */,
 				38186DA82952152D00C79A5C /* ContentView.swift */,
 				383B96D42952819D0082E9F2 /* BridgingHeader.h */,
@@ -483,6 +485,8 @@
 				DEVELOPMENT_TEAM = MDW93W4C94;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QuickLoad/Info.plist;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -518,6 +522,8 @@
 				DEVELOPMENT_TEAM = MDW93W4C94;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QuickLoad/Info.plist;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

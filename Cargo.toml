@@ -10,4 +10,9 @@ crate-type = ["staticlib"]
 swift-bridge-build = "0.1"
 
 [dependencies]
-swift-bridge = "0.1"
+swift-bridge = { version = "0.1", features = ["async"] }
+
+anyhow = "1"
+hyper = "0.14"
+hyper-tls = "0.5"
+quickload-loader = { git = "https://github.com/MOZGIII/quickload.git" }
