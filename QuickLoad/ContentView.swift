@@ -8,14 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var statusMessage = "Ready!"
-    @State var content = ""
-    @State var error = ""
+    @StateObject private var loadingState = LoadingState()
 
     var body: some View {
         VStack {
-            Text(self.statusMessage)
-            Text(self.error)
+            Text(loadingState.statusMessage)
+            Text(loadingState.error ?? "").foregroundColor(Color.red)
             Button(action: {
                 Task {
                     await self.load()
@@ -23,22 +21,19 @@ struct ContentView: View {
             }) {
                 Text("Load")
             }
-            Text(self.content)
         }
         .padding()
     }
 
     func load() async {
-        self.statusMessage = "Loading..."
-        self.error = ""
+        self.loadingState.start()
 
         let manager = Manager()
         let url = "https://raw.githubusercontent.com/chinedufn/swift-bridge/master/examples/async-functions/src/lib.rs"
         let path = URL.documentsDirectory.appendingPathComponent("myio.txt").path(percentEncoded: false)
         let error = await manager.load(url, path)
 
-        self.statusMessage = "Ready!"
-        self.error = error.toString()
+        self.loadingState.stop(error: error.toString())
     }
 }
 
