@@ -17,7 +17,6 @@
 		383B96D7295285B20082E9F2 /* libbridges.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 383B96D62952859F0082E9F2 /* libbridges.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		383B96E2295287A80082E9F2 /* bridges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B96DF295287A80082E9F2 /* bridges.swift */; };
 		383B96E3295287A80082E9F2 /* SwiftBridgeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B96E1295287A80082E9F2 /* SwiftBridgeCore.swift */; };
-		3888D1F5296512A500A97561 /* URLSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3888D1F4296512A500A97561 /* URLSelectionView.swift */; };
 		3888D1FA2965151500A97561 /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3888D1F92965151500A97561 /* LoadingState.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,7 +55,6 @@
 		383B96E0295287A80082E9F2 /* SwiftBridgeCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftBridgeCore.h; sourceTree = "<group>"; };
 		383B96E1295287A80082E9F2 /* SwiftBridgeCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftBridgeCore.swift; sourceTree = "<group>"; };
 		3888D1F32964E00600A97561 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		3888D1F4296512A500A97561 /* URLSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSelectionView.swift; sourceTree = "<group>"; };
 		3888D1F92965151500A97561 /* LoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,7 +113,6 @@
 				38186DA62952152D00C79A5C /* QuickLoadApp.swift */,
 				38186DA82952152D00C79A5C /* ContentView.swift */,
 				3888D1F92965151500A97561 /* LoadingState.swift */,
-				3888D1F4296512A500A97561 /* URLSelectionView.swift */,
 				383B96D42952819D0082E9F2 /* BridgingHeader.h */,
 				38186DAA2952152E00C79A5C /* Assets.xcassets */,
 				38186DAC2952152E00C79A5C /* Preview Content */,
@@ -330,7 +327,6 @@
 				383B96E2295287A80082E9F2 /* bridges.swift in Sources */,
 				38186DA92952152D00C79A5C /* ContentView.swift in Sources */,
 				38186DA72952152D00C79A5C /* QuickLoadApp.swift in Sources */,
-				3888D1F5296512A500A97561 /* URLSelectionView.swift in Sources */,
 				383B96E3295287A80082E9F2 /* SwiftBridgeCore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
