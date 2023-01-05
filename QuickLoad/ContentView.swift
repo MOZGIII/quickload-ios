@@ -9,14 +9,18 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var loadingState = LoadingState()
+    @SceneStorage("ContentView.url") private var url = "";
+    @SceneStorage("ContentView.path") private var path = "";
 
     var body: some View {
         VStack {
             Text(loadingState.statusMessage)
             Text(loadingState.error ?? "").foregroundColor(Color.red)
+            TextField("URL", text: $url)
+            TextField("File path", text: $path)
             Button(action: {
                 Task {
-                    await self.load()
+                    await self.load(url: url, path: path)
                 }
             }) {
                 Text("Load")
@@ -25,12 +29,11 @@ struct ContentView: View {
         .padding()
     }
 
-    func load() async {
+    func load(url: String, path: String) async {
         self.loadingState.start()
 
         let manager = Manager()
-        let url = "https://raw.githubusercontent.com/chinedufn/swift-bridge/master/examples/async-functions/src/lib.rs"
-        let path = URL.documentsDirectory.appendingPathComponent("myio.txt").path(percentEncoded: false)
+        let path = URL.documentsDirectory.appendingPathComponent(path).path(percentEncoded: false)
         let error = await manager.load(url, path)
 
         self.loadingState.stop(error: error.toString())
