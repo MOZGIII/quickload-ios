@@ -354,6 +354,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "nonzero_ext"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "38bf9645c8b145698bb0b18a4637dcacbc421ea49bef2317e4fd8065a387cf21"
+
+[[package]]
+name = "num-traits"
+version = "0.2.15"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "578ede34cf02f8924ab9447f50c28075b4d3e5b269972345e7e0372b38c6cdcd"
+dependencies = [
+ "autocfg",
+]
+
+[[package]]
 name = "num_cpus"
 version = "1.15.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -453,14 +468,18 @@ dependencies = [
 ]
 
 [[package]]
-name = "quickload-chunk-picker"
+name = "quickload-chunker"
 version = "0.1.0"
-source = "git+https://github.com/MOZGIII/quickload.git#e804c9a76154cbd8a5fa7e21dc7ab3cf7b1cbdbe"
+source = "git+https://github.com/MOZGIII/quickload.git#56b31fe7a9b1321daf647ada9a3cf5c23e0e1c97"
+dependencies = [
+ "nonzero_ext",
+ "num-traits",
+]
 
 [[package]]
 name = "quickload-disk-space-allocation"
 version = "0.1.0"
-source = "git+https://github.com/MOZGIII/quickload.git#e804c9a76154cbd8a5fa7e21dc7ab3cf7b1cbdbe"
+source = "git+https://github.com/MOZGIII/quickload.git#56b31fe7a9b1321daf647ada9a3cf5c23e0e1c97"
 dependencies = [
  "anyhow",
  "cfg-if",
@@ -469,16 +488,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "quickload-linear-chunk-picker"
+version = "0.1.0"
+source = "git+https://github.com/MOZGIII/quickload.git#56b31fe7a9b1321daf647ada9a3cf5c23e0e1c97"
+dependencies = [
+ "num-traits",
+ "quickload-chunker",
+]
+
+[[package]]
 name = "quickload-loader"
 version = "0.1.0"
-source = "git+https://github.com/MOZGIII/quickload.git#e804c9a76154cbd8a5fa7e21dc7ab3cf7b1cbdbe"
+source = "git+https://github.com/MOZGIII/quickload.git#56b31fe7a9b1321daf647ada9a3cf5c23e0e1c97"
 dependencies = [
  "anyhow",
  "futures-util",
  "hyper",
  "positioned-io-preview",
- "quickload-chunk-picker",
+ "quickload-chunker",
  "quickload-disk-space-allocation",
+ "quickload-linear-chunk-picker",
  "tokio",
 ]
 
@@ -641,9 +670,9 @@ dependencies = [
 
 [[package]]
 name = "tokio"
-version = "1.23.0"
+version = "1.24.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "eab6d665857cc6ca78d6e80303a02cea7a7851e85dfbd77cbdc09bd129f1ef46"
+checksum = "7125661431c26622a80ca5051a2f936c9a678318e0351007b0cc313143024e5c"
 dependencies = [
  "autocfg",
  "bytes",
