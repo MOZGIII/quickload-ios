@@ -13,20 +13,22 @@ struct ContentView: View {
     @SceneStorage("ContentView.path") private var path = "";
 
     var body: some View {
-        VStack {
-            Text(loadingState.statusMessage)
+        Layout {
+            Text(loadingState.statusMessage).font(.headline)
             Text(loadingState.error ?? "").foregroundColor(Color.red)
-            TextField("URL", text: $url)
-            TextField("File path", text: $path)
-            Button(action: {
-                Task {
-                    await self.load(url: url, path: path)
-                }
-            }) {
-                Text("Load")
+
+            if loadingState.isLoading {
+                ProgressView()
+            } else {
+                InputView(url: $url, path: $path, onLoad: onLoad)
             }
         }
-        .padding()
+    }
+
+    func onLoad() {
+        Task {
+            await self.load(url: url, path: path)
+        }
     }
 
     func load(url: String, path: String) async {
