@@ -35,7 +35,9 @@ struct ContentView: View {
         self.loadingState.start()
 
         let manager = Manager()
-        let path = URL.documentsDirectory.appendingPathComponent(path).path(percentEncoded: false)
+        let path = URL.documentsDirectory
+            .appendingPathComponent(path)
+            .path(percentEncoded: false)
         let error = await manager.load(url, path)
 
         self.loadingState.stop(error: error.toString())
