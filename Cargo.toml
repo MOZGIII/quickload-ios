@@ -15,4 +15,6 @@ swift-bridge = { version = "0.1", features = ["async"] }
 anyhow = "1"
 hyper = "0.14"
 hyper-tls = "0.5"
+quickload-chunker = { git = "https://github.com/MOZGIII/quickload.git" }
+quickload-disk-space-allocation = { git = "https://github.com/MOZGIII/quickload.git" }
 quickload-loader = { git = "https://github.com/MOZGIII/quickload.git" }

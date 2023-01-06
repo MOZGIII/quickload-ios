@@ -27,6 +27,8 @@ dependencies = [
  "anyhow",
  "hyper",
  "hyper-tls",
+ "quickload-chunker",
+ "quickload-disk-space-allocation",
  "quickload-loader",
  "swift-bridge",
  "swift-bridge-build",
@@ -470,7 +472,7 @@ dependencies = [
 [[package]]
 name = "quickload-chunker"
 version = "0.1.0"
-source = "git+https://github.com/MOZGIII/quickload.git#56b31fe7a9b1321daf647ada9a3cf5c23e0e1c97"
+source = "git+https://github.com/MOZGIII/quickload.git#350d83417020ed53dfeac5a9b5db1027efdfa89b"
 dependencies = [
  "nonzero_ext",
  "num-traits",
@@ -479,7 +481,7 @@ dependencies = [
 [[package]]
 name = "quickload-disk-space-allocation"
 version = "0.1.0"
-source = "git+https://github.com/MOZGIII/quickload.git#56b31fe7a9b1321daf647ada9a3cf5c23e0e1c97"
+source = "git+https://github.com/MOZGIII/quickload.git#350d83417020ed53dfeac5a9b5db1027efdfa89b"
 dependencies = [
  "anyhow",
  "cfg-if",
@@ -490,7 +492,7 @@ dependencies = [
 [[package]]
 name = "quickload-linear-chunk-picker"
 version = "0.1.0"
-source = "git+https://github.com/MOZGIII/quickload.git#56b31fe7a9b1321daf647ada9a3cf5c23e0e1c97"
+source = "git+https://github.com/MOZGIII/quickload.git#350d83417020ed53dfeac5a9b5db1027efdfa89b"
 dependencies = [
  "num-traits",
  "quickload-chunker",
@@ -499,7 +501,7 @@ dependencies = [
 [[package]]
 name = "quickload-loader"
 version = "0.1.0"
-source = "git+https://github.com/MOZGIII/quickload.git#56b31fe7a9b1321daf647ada9a3cf5c23e0e1c97"
+source = "git+https://github.com/MOZGIII/quickload.git#350d83417020ed53dfeac5a9b5db1027efdfa89b"
 dependencies = [
  "anyhow",
  "futures-util",
