@@ -11,36 +11,32 @@ struct ContentView: View {
     @StateObject private var loadingState = LoadingState()
     @SceneStorage("ContentView.url") private var url = "";
     @SceneStorage("ContentView.path") private var path = "";
+    @State private var manager: Manager?;
 
     var body: some View {
         Layout {
-            Text(loadingState.statusMessage).font(.headline)
+            Text(loadingState.isLoading ? "Loading..." : "Ready!").font(.headline)
             Text(loadingState.error ?? "").foregroundColor(Color.red)
 
             if loadingState.isLoading {
-                ProgressView()
+                ProgressView(
+                    cancellationState: loadingState.cancellationState,
+                    onCancel: cancel
+                )
             } else {
-                InputView(url: $url, path: $path, onLoad: onLoad)
+                InputView(url: $url, path: $path, onLoad: load)
             }
         }
     }
 
-    func onLoad() {
+    func load() {
         Task {
-            await self.load(url: url, path: path)
+            await self.loadingState.load(url: url, path: path)
         }
     }
 
-    func load(url: String, path: String) async {
-        self.loadingState.start()
-
-        let manager = Manager()
-        let path = URL.documentsDirectory
-            .appendingPathComponent(path)
-            .path(percentEncoded: false)
-        let error = await manager.load(url, path)
-
-        self.loadingState.stop(error: error.toString())
+    func cancel() {
+        self.loadingState.cancel()
     }
 }
 

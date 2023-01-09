@@ -7,20 +7,34 @@
 
 import Foundation
 
+@MainActor
 class LoadingState: ObservableObject {
-    @Published var statusMessage: String = "Ready!"
-    @Published var error: String? = nil
-    @Published var isLoading: Bool = false
+    @Published var manager: Manager?
+    @Published var error: String?
+    @Published var cancellationState: CancellationEffect?
 
-    func start() {
-        statusMessage = "Loading..."
-        error = nil
-        isLoading = true
+    var isLoading: Bool { manager != nil }
+
+    func load(url: String, path: String) async {
+        guard !isLoading else { return }
+
+        let path = URL.documentsDirectory
+            .appendingPathComponent(path)
+            .path(percentEncoded: false)
+
+        let manager = Manager()
+
+        self.manager = manager
+        self.cancellationState = nil
+
+        self.error = nil
+        let error = await manager.load(url, path)
+        self.error = error.toString()
+
+        self.manager = nil
     }
 
-    func stop(error: String?) {
-        statusMessage = "Ready!"
-        self.error = error
-        isLoading = false
+    func cancel() {
+        cancellationState = manager?.cancel()
     }
 }
