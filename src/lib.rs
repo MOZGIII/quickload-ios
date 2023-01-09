@@ -1,7 +1,15 @@
 use std::sync::Arc;
 
+use tokio_util::sync::CancellationToken;
+
 #[swift_bridge::bridge]
 mod ffi {
+    enum CancellationEffect {
+        IssuedWithWriteQueue,
+        IssuedWithDropQueue,
+        NoEffect,
+    }
+
     extern "Rust" {
         type Manager;
 
@@ -9,14 +17,21 @@ mod ffi {
         fn new() -> Manager;
 
         async fn load(self: &Manager, url: String, file_path: String) -> String;
+        fn cancel(self: &Manager) -> CancellationEffect;
     }
 }
 
-pub struct Manager {}
+pub struct Manager {
+    cancel_write_queued: CancellationToken,
+    cancel_drop_queued: CancellationToken,
+}
 
 impl Manager {
     fn new() -> Self {
-        Self {}
+        Self {
+            cancel_write_queued: CancellationToken::new(),
+            cancel_drop_queued: CancellationToken::new(),
+        }
     }
 
     async fn load(&self, url: String, file_path: String) -> String {
@@ -25,6 +40,18 @@ impl Manager {
             Err(err) => err,
             Ok(()) => "no error".to_owned(),
         }
+    }
+
+    fn cancel(&self) -> ffi::CancellationEffect {
+        if !self.cancel_write_queued.is_cancelled() {
+            self.cancel_write_queued.cancel();
+            return ffi::CancellationEffect::IssuedWithWriteQueue;
+        }
+        if !self.cancel_drop_queued.is_cancelled() {
+            self.cancel_drop_queued.cancel();
+            return ffi::CancellationEffect::IssuedWithWriteQueue;
+        }
+        ffi::CancellationEffect::NoEffect
     }
 
     async fn real_load(&self, url: &str, file_path: &str) -> Result<(), String> {
@@ -56,6 +83,8 @@ impl Manager {
             uri: parsed_url,
             writer,
             chunker,
+            cancel_write_queued: self.cancel_write_queued.clone(),
+            cancel_drop_queued: self.cancel_drop_queued.clone(),
         };
 
         loader

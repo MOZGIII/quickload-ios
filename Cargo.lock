@@ -32,6 +32,7 @@ dependencies = [
  "quickload-loader",
  "swift-bridge",
  "swift-bridge-build",
+ "tokio-util",
 ]
 
 [[package]]
@@ -73,6 +74,17 @@ name = "core-foundation-sys"
 version = "0.8.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5827cebf4670468b8772dd191856768aedcb1b0278a04f989f7766351917b9dc"
+
+[[package]]
+name = "derivative"
+version = "2.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fcc3dd5e9e9c0b295d6e1e4d811fb6f157d5ffd784b8d202fc62eac8035a770b"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
 
 [[package]]
 name = "fastrand"
@@ -472,8 +484,9 @@ dependencies = [
 [[package]]
 name = "quickload-chunker"
 version = "0.1.0"
-source = "git+https://github.com/MOZGIII/quickload.git#350d83417020ed53dfeac5a9b5db1027efdfa89b"
+source = "git+https://github.com/MOZGIII/quickload.git#75ee4f895e13dbcceac43ccaf4636905f2e9d2a0"
 dependencies = [
+ "derivative",
  "nonzero_ext",
  "num-traits",
 ]
@@ -481,9 +494,8 @@ dependencies = [
 [[package]]
 name = "quickload-disk-space-allocation"
 version = "0.1.0"
-source = "git+https://github.com/MOZGIII/quickload.git#350d83417020ed53dfeac5a9b5db1027efdfa89b"
+source = "git+https://github.com/MOZGIII/quickload.git#75ee4f895e13dbcceac43ccaf4636905f2e9d2a0"
 dependencies = [
- "anyhow",
  "cfg-if",
  "nix",
  "winapi",
@@ -492,7 +504,7 @@ dependencies = [
 [[package]]
 name = "quickload-linear-chunk-picker"
 version = "0.1.0"
-source = "git+https://github.com/MOZGIII/quickload.git#350d83417020ed53dfeac5a9b5db1027efdfa89b"
+source = "git+https://github.com/MOZGIII/quickload.git#75ee4f895e13dbcceac43ccaf4636905f2e9d2a0"
 dependencies = [
  "num-traits",
  "quickload-chunker",
@@ -501,7 +513,7 @@ dependencies = [
 [[package]]
 name = "quickload-loader"
 version = "0.1.0"
-source = "git+https://github.com/MOZGIII/quickload.git#350d83417020ed53dfeac5a9b5db1027efdfa89b"
+source = "git+https://github.com/MOZGIII/quickload.git#75ee4f895e13dbcceac43ccaf4636905f2e9d2a0"
 dependencies = [
  "anyhow",
  "futures-util",
@@ -511,6 +523,8 @@ dependencies = [
  "quickload-disk-space-allocation",
  "quickload-linear-chunk-picker",
  "tokio",
+ "tokio-util",
+ "tracing",
 ]
 
 [[package]]
@@ -672,9 +686,9 @@ dependencies = [
 
 [[package]]
 name = "tokio"
-version = "1.24.0"
+version = "1.24.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7125661431c26622a80ca5051a2f936c9a678318e0351007b0cc313143024e5c"
+checksum = "1d9f76183f91ecfb55e1d7d5602bd1d979e38a3a522fe900241cf195624d67ae"
 dependencies = [
  "autocfg",
  "bytes",
@@ -684,7 +698,19 @@ dependencies = [
  "num_cpus",
  "pin-project-lite",
  "socket2",
+ "tokio-macros",
  "windows-sys 0.42.0",
+]
+
+[[package]]
+name = "tokio-macros"
+version = "1.8.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d266c00fde287f55d3f1c3e96c500c362a2b8c695076ec180f27918820bc6df8"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
@@ -725,7 +751,19 @@ checksum = "8ce8c33a8d48bd45d624a6e523445fd21ec13d3653cd51f681abf67418f54eb8"
 dependencies = [
  "cfg-if",
  "pin-project-lite",
+ "tracing-attributes",
  "tracing-core",
+]
+
+[[package]]
+name = "tracing-attributes"
+version = "0.1.23"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4017f8f45139870ca7e672686113917c71c7a6e02d4924eda67186083c03081a"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
@@ -739,9 +777,9 @@ dependencies = [
 
 [[package]]
 name = "try-lock"
-version = "0.2.3"
+version = "0.2.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "59547bce71d9c38b83d9c0e92b6066c4253371f15005def0c30d9657f50c7642"
+checksum = "3528ecfd12c466c6f163363caf2d02a71161dd5e1cc6ae7b34207ea2d42d81ed"
 
 [[package]]
 name = "unicode-ident"
